@@ -10,7 +10,8 @@ export type Theme = {
   disabled: string,
   link: string,
   separator: string,
-  primary: string
+  primary: string,
+  secondary: string,
 }
 
 export const LightTheme: Theme = {
@@ -25,7 +26,8 @@ export const LightTheme: Theme = {
   disabled: '#aeaeb2',
   link: '#2196F3',
   separator: '#bdbdc2',
-  primary: '#2196f3'
+  primary: '#2196f3',
+  secondary: '#fa827e'
 }
 
 export const DarkTheme: Theme = {
@@ -40,7 +42,8 @@ export const DarkTheme: Theme = {
   disabled: '#48484a',
   link: '#0c83ff',
   separator: '#3e3e41',
-  primary: '#0c83ff'
+  primary: '#0c83ff',
+  secondary: '#6F68DF'
 }
 
 // export const themes = {
