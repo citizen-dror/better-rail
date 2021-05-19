@@ -17,7 +17,8 @@ import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-c
 import { initFonts } from "./theme/fonts" // expo
 import * as storage from "./utils/storage"
 import { useBackButtonHandler, RootNavigator, canExit, setRootNavigation, useNavigationPersistence } from "./navigators"
-import { RootStore, RootStoreProvider, setupRootStore, ThemeProvider } from "./models"
+import { RootStore, RootStoreProvider, setupRootStore, } from "./models"
+import { ThemeProvider } from "./contexts"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
 import { setInitialLanguage, setUserLanguage } from "./i18n/i18n"
 

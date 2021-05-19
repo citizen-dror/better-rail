@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react"
-import { Appearance, KeyboardAvoidingView, Platform, ScrollView, StatusBar, View } from "react-native"
+import React, { useContext } from "react"
+import { KeyboardAvoidingView, Platform, ScrollView, StatusBar, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { ScreenProps } from "./screen.props"
 import { isNonScrolling, offsets, presets } from "./screen.presets"
+import { ThemeContext } from "../../contexts"
 
 const isIos = Platform.OS === "ios"
-const isDarkMode = Appearance.getColorScheme() === "dark"
+// const isDarkMode = Appearance.getColorScheme() === "dark"
 
 function ScreenWithoutScrolling(props: ScreenProps) {
+  const { theme } = useContext(ThemeContext)
   const insets = useSafeAreaInsets()
   const preset = presets.fixed
   const style = props.style || {}
@@ -21,9 +23,9 @@ function ScreenWithoutScrolling(props: ScreenProps) {
       keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
     >
       <StatusBar
-        barStyle={props.statusBar || isDarkMode ? "light-content" : "dark-content"}
+        barStyle={props.statusBar || theme.isDark ? "light-content" : "dark-content"}
         translucent={props.translucent || false}
-        backgroundColor={props.statusBarBackgroundColor || (isDarkMode ? "#1c1c1e" : "#f2f2f7")}
+        backgroundColor={props.statusBarBackgroundColor || theme.background}
         animated={true}
       />
       <View style={[preset.inner, style, insetStyle]}>{props.children}</View>
@@ -32,25 +34,13 @@ function ScreenWithoutScrolling(props: ScreenProps) {
 }
 
 function ScreenWithScrolling(props: ScreenProps) {
+  const { theme } = useContext(ThemeContext)
   const insets = useSafeAreaInsets()
   const preset = presets.scroll
   const style = props.style || {}
   const backgroundStyle = props.backgroundColor ? { backgroundColor: props.backgroundColor } : {}
   const insetStyle = { paddingTop: props.unsafe ? 0 : insets.top }
 
-  // const [isDarkMode1, setiIsDarkMode1] = useState(false)
-  // useEffect(() => {
-  //   const listener = () => {
-  //     const colorScheme = Appearance.getColorScheme()
-  //     console.log('listener Appearance', colorScheme)
-  //     setiIsDarkMode1(colorScheme === "dark")
-  //   }
-  //   Appearance.addChangeListener(listener)
-  //   return () => {
-  //     Appearance.removeChangeListener(listener)
-  //   }
-  // }, [])
-  // const backgroundStyle = isDarkMode ? { backgroundColor: '#6F6664' } : { backgroundColor: '#EDF314' }
   return (
     <KeyboardAvoidingView
       style={[preset.outer, backgroundStyle]}
@@ -58,9 +48,9 @@ function ScreenWithScrolling(props: ScreenProps) {
       keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
     >
       <StatusBar
-        barStyle={props.statusBar || isDarkMode ? "light-content" : "dark-content"}
+        barStyle={props.statusBar || theme.isDark ? "light-content" : "dark-content"}
         translucent={props.translucent || false}
-        backgroundColor={props.statusBarBackgroundColor || (isDarkMode ? "#1c1c1e" : "#f2f2f7")}
+        backgroundColor={props.statusBarBackgroundColor || theme.background}
         animated={true}
       />
       <View style={[preset.outer, backgroundStyle, insetStyle]}>
