@@ -1,11 +1,11 @@
 import React, { useRef, useState, useContext } from "react"
 import { observer } from "mobx-react-lite"
-import { Image, View, TouchableOpacity, Animated, PixelRatio, ViewStyle, ImageStyle, Dimensions } from "react-native"
+import { Image, View, TouchableOpacity, Animated, PixelRatio, ViewStyle, ImageStyle, Dimensions, TextStyle } from "react-native"
 import DateTimePickerModal from "react-native-modal-datetime-picker"
 import { Screen, Button, Text, StationCard, DummyInput, ChangeDirectionButton } from "../../components"
-import { useStores } from "../../models"
-import { ThemeContext } from "../../models/theme-context/theme-context"
-import { primaryFontIOS, spacing } from "../../theme"
+import { useStores, ThemeContext } from "../../models"
+// import { ThemeContext } from "../../models/theme-context/theme-context"
+import { color, primaryFontIOS, spacing } from "../../theme"
 import { PlannerScreenProps } from "../../navigators/main-navigator"
 import { useStations } from "../../data/stations"
 import { formatRelative, differenceInMinutes } from "date-fns"
@@ -28,10 +28,6 @@ const HEADER_WRAPPER: ViewStyle = {
 
 let headerIconSize = 25
 if (fontScale > 1.15) headerIconSize = 30
-
-const HEADER_TITLE: TextStyle = {
-  marginBottom: primaryFontIOS === "System" ? 6 : 3,
-}
 
 const CHANGE_DIRECTION_WRAPPER: ViewStyle = {
   width: 65,
@@ -59,13 +55,17 @@ export const PlannerScreen = observer(function PlannerScreen({ navigation }: Pla
   const stations = useStations()
 
   const ROOT: ViewStyle = {
-    backgroundColor: 'red',
+    backgroundColor: theme.background,
   }
 
   const CONTENT_WRAPPER: ViewStyle = {
     flex: 1,
     padding: spacing[4],
     backgroundColor: theme.background,
+  }
+  const HEADER_TITLE: TextStyle = {
+    marginBottom: primaryFontIOS === "System" ? 6 : 3,
+    color: theme.label
   }
   const SETTINGS_ICON: ImageStyle = {
     width: headerIconSize,
@@ -78,7 +78,7 @@ export const PlannerScreen = observer(function PlannerScreen({ navigation }: Pla
     width: 16 * fontScale,
     height: 16 * fontScale,
     marginStart: 1 + spacing[1] * fontScale,
-    tintColor: theme.label,
+    tintColor: theme.secondaryLabel,
     opacity: 0.5,
     transform: [{ rotate: "90deg" }],
   }

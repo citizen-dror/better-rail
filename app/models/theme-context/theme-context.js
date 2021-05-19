@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react"
+import React, { createContext, useEffect, useState } from "react"
 import { Appearance } from "react-native"
 import { themes } from "../../theme"
 
@@ -7,11 +7,10 @@ const initMode = (Appearance.getColorScheme() === "dark") ? themes.dark : themes
 export const ThemeContext = createContext({})
 const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(initMode)
-
   useEffect(() => {
     const listener = () => {
       const colorScheme = Appearance.getColorScheme()
-      console.log('listener Appearance', colorScheme)
+      // console.log('listener Appearance', colorScheme)
       setThemeByName(colorScheme)
     }
     Appearance.addChangeListener(listener)
@@ -23,7 +22,7 @@ const ThemeProvider = ({ children }) => {
     const them1 = (name === "dark") ? themes.dark : themes.light
     setTheme(them1)
   }
-  console.log("theme back", theme.background)
+  // console.log("theme back", theme.background)
   return (
         <ThemeContext.Provider value={{
           theme,

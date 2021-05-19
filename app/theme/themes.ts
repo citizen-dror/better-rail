@@ -10,7 +10,8 @@ export const themes = {
     inputPlaceholderBackground: '#e0e1e6',
     disabled: '#aeaeb2',
     link: '#2196F3',
-    separator: '#bdbdc2'
+    separator: '#bdbdc2',
+    primary: '#2196f3'
   },
   dark: {
     foreground: '#ffffff',
@@ -23,6 +24,7 @@ export const themes = {
     inputPlaceholderBackground: '#3a3a3c',
     disabled: '#48484a',
     link: '#0c83ff',
-    separator: '#3e3e41'
+    separator: '#3e3e41',
+    primary: '#0c83ff'
   },
 }
