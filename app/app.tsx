@@ -18,6 +18,7 @@ import { initFonts } from "./theme/fonts" // expo
 import * as storage from "./utils/storage"
 import { useBackButtonHandler, RootNavigator, canExit, setRootNavigation, useNavigationPersistence } from "./navigators"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models"
+import ThemeProvider from "./models/theme-context/theme-context"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
 import { setInitialLanguage, setUserLanguage } from "./i18n/i18n"
 
@@ -38,11 +39,11 @@ function App() {
 
   setRootNavigation(navigationRef)
   useBackButtonHandler(navigationRef, canExit)
-  const { initialNavigationState, onNavigationStateChange } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
+  // const { initialNavigationState, onNavigationStateChange } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
   // Kick off initial async loading actions, like loading fonts and RootStore
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       await initFonts() // expo
       setupRootStore().then(setRootStore)
     })()
@@ -68,17 +69,19 @@ function App() {
   // otherwise, we're ready to render the app
   return (
     <ToggleStorybook>
-      <RootStoreProvider value={rootStore}>
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          {__DEV__ ? (
-            // Use navigation persistence for development
-            // <RootNavigator ref={navigationRef} initialState={initialNavigationState} onStateChange={onNavigationStateChange} />
-            <RootNavigator ref={navigationRef} />
-          ) : (
-            <RootNavigator ref={navigationRef} />
-          )}
-        </SafeAreaProvider>
-      </RootStoreProvider>
+      <ThemeProvider>
+        <RootStoreProvider value={rootStore}>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            {__DEV__ ? (
+              // Use navigation persistence for development
+              // <RootNavigator ref={navigationRef} initialState={initialNavigationState} onStateChange={onNavigationStateChange} />
+              <RootNavigator ref={navigationRef} />
+            ) : (
+              <RootNavigator ref={navigationRef} />
+            )}
+          </SafeAreaProvider>
+        </RootStoreProvider>
+      </ThemeProvider>
     </ToggleStorybook>
   )
 }

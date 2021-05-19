@@ -35,23 +35,22 @@ function ScreenWithScrolling(props: ScreenProps) {
   const insets = useSafeAreaInsets()
   const preset = presets.scroll
   const style = props.style || {}
-  // const backgroundStyle = props.backgroundColor ? { backgroundColor: props.backgroundColor } : {}
+  const backgroundStyle = props.backgroundColor ? { backgroundColor: props.backgroundColor } : {}
   const insetStyle = { paddingTop: props.unsafe ? 0 : insets.top }
 
-  const [isDarkMode1, setiIsDarkMode1] = useState(false)
-
-  useEffect(() => {
-    const listener = () => {
-      const colorScheme = Appearance.getColorScheme()
-      console.log('listener Appearance', colorScheme)
-      setiIsDarkMode1(colorScheme === "dark")
-    }
-    Appearance.addChangeListener(listener)
-    return () => {
-      Appearance.removeChangeListener(listener)
-    }
-  }, [])
-  const backgroundStyle = isDarkMode1 ? { backgroundColor: '#6F6664' } : { backgroundColor: '#EDF314' }
+  // const [isDarkMode1, setiIsDarkMode1] = useState(false)
+  // useEffect(() => {
+  //   const listener = () => {
+  //     const colorScheme = Appearance.getColorScheme()
+  //     console.log('listener Appearance', colorScheme)
+  //     setiIsDarkMode1(colorScheme === "dark")
+  //   }
+  //   Appearance.addChangeListener(listener)
+  //   return () => {
+  //     Appearance.removeChangeListener(listener)
+  //   }
+  // }, [])
+  // const backgroundStyle = isDarkMode ? { backgroundColor: '#6F6664' } : { backgroundColor: '#EDF314' }
   return (
     <KeyboardAvoidingView
       style={[preset.outer, backgroundStyle]}
@@ -59,9 +58,9 @@ function ScreenWithScrolling(props: ScreenProps) {
       keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
     >
       <StatusBar
-        barStyle={props.statusBar || isDarkMode1 ? "light-content" : "dark-content"}
+        barStyle={props.statusBar || isDarkMode ? "light-content" : "dark-content"}
         translucent={props.translucent || false}
-        backgroundColor={props.statusBarBackgroundColor || (isDarkMode1 ? "#1c1c1e" : "#f2f2f7")}
+        backgroundColor={props.statusBarBackgroundColor || (isDarkMode ? "#1c1c1e" : "#f2f2f7")}
         animated={true}
       />
       <View style={[preset.outer, backgroundStyle, insetStyle]}>
