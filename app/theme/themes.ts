@@ -12,6 +12,7 @@ export type Theme = {
   separator: string,
   primary: string,
   secondary: string,
+  dimmer: string
 }
 
 export const LightTheme: Theme = {
@@ -27,7 +28,8 @@ export const LightTheme: Theme = {
   link: '#2196F3',
   separator: '#bdbdc2',
   primary: '#2196f3',
-  secondary: '#fa827e'
+  secondary: '#fa827e',
+  dimmer: '#e0e1e6'
 }
 
 export const DarkTheme: Theme = {
@@ -43,7 +45,8 @@ export const DarkTheme: Theme = {
   link: '#0c83ff',
   separator: '#3e3e41',
   primary: '#0c83ff',
-  secondary: '#6F68DF'
+  secondary: '#6F68DF',
+  dimmer: '#3a3a3c'
 }
 
 // export const themes = {
